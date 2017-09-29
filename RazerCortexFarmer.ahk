@@ -13,33 +13,42 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 #Include FindClick.ahk  ; usefull lib for clicking images
 
+
+; --------------- OPEN RAZER CORTEX ---------------
+
+if !ProcessExist("RazerCortex.exe"){
+    Run, "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
+    WinWait, ahk_exe RazerCortex.exe
+    WinClose, ahk_exe RazerCortex.exe
+}
+
+; --------------- OPEN BATTLE.NET ---------------
+
+; (using WinExist to open from systray too)
+if !WinExist("ahk_exe Battle.net.exe"){
+    Try Run, "C:\Program Files (x86)\Blizzard App\Battle.net.exe"
+    Try Run, "C:\Program Files (x86)\Battle.net\Battle.net.exe"
+    WinWait, ahk_exe Battle.net.exe
+}
+
+; --------------- OPEN HEARTHSTONE ---------------
+
+; bring window to front 
+WinActivate, ahk_exe Battle.net.exe
+; click hearthstone icon on left
+FindClick("hearthstone.png", "o30 r w60000,500")
+; get window size
+CoordMode, Mouse, Relative
+WinGetPos, x, y, w, h, ahk_exe Battle.net.exe
+; click launch button 300px from left edge & 70px from window bottom
+clickheight := h - 70
+Click 300, %clickheight%
+
+/*
+*   Helper Functions
+*/
+
 ProcessExist(Name){
 	Process,Exist,%Name%
 	return Errorlevel
 }
-
-; run Razer Cortex
-if !ProcessExist("RazerCortex.exe"){
-    Run, "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
-    ; wait 30 seconds for program to load
-    Sleep, 30 * 1000
-}
-
-; open Battle.net
-if !ProcessExist("Battle.net.exe"){
-    Try Run, "C:\Program Files (x86)\Blizzard App\Battle.net.exe"
-    Try Run, "C:\Program Files (x86)\Battle.net\Battle.net.exe"
-    ; wait 30 seconds for program to load
-    Sleep, 30 * 1000
-}
-
-; open Hearthstone
-
-; bring window to front 
-WinActivate, ahk_exe Battle.net.exe ; will this work if closed to tray???
-; search img hearthstone.png
-; click hearthstone icon on left
-FindClick("hearthstone.png", "o30 r")
-; get window size
-; click 315px from left edge & 70px from window bottom
-; click launch botton
