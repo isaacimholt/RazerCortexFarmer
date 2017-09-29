@@ -18,7 +18,14 @@ Run, "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
 Sleep, 30 * 1000
 
 ; open Battle.net
-Run, "C:\Program Files (x86)\Blizzard App\Battle.net.exe"
+Try {
+    Run, "C:\Program Files (x86)\Blizzard App\Battle.net.exe"
+}
+
+Try {
+    Run, "C:\Program Files (x86)\Battle.net\Battle.net.exe"
+}
+
 
 ; wait 30 seconds for program to load
 Sleep, 30 * 1000
