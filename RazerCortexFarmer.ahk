@@ -22,6 +22,7 @@ if !ProcessExist("RazerCortex.exe"){
     WinClose, ahk_exe RazerCortex.exe
 }
 
+
 ; --------------- OPEN BATTLE.NET ---------------
 
 ; (using WinExist to open from systray too)
@@ -31,22 +32,24 @@ if !WinExist("ahk_exe Battle.net.exe"){
     WinWait, ahk_exe Battle.net.exe
 }
 
+
 ; --------------- OPEN HEARTHSTONE ---------------
 
-; bring window to front 
+; bring battle.net to front 
 WinActivate, ahk_exe Battle.net.exe
+
 ; click hearthstone icon on left
+; (options are: 30 shades of variance allowed, relative window, wait 60s)
 FindClick("hearthstone.png", "o30 r w60000,500")
-; get window size
+
+; click launch button 300px from left edge & 70px from window bottom
 CoordMode, Mouse, Relative
 WinGetPos, x, y, w, h, ahk_exe Battle.net.exe
-; click launch button 300px from left edge & 70px from window bottom
 clickheight := h - 70
 Click 300, %clickheight%
 
-/*
-*   Helper Functions
-*/
+
+; --------------- HELPER FUNCTIONS ---------------
 
 ProcessExist(Name){
 	Process,Exist,%Name%
