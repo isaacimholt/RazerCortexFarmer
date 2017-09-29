@@ -11,21 +11,35 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-; run Razer Cortex
-Run, "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
+#Include FindClick.ahk  ; usefull lib for clicking images
 
-; wait 30 seconds for program to load
-Sleep, 30 * 1000
+ProcessExist(Name){
+	Process,Exist,%Name%
+	return Errorlevel
+}
+
+; run Razer Cortex
+if !ProcessExist("RazerCortex.exe"){
+    Run, "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
+    ; wait 30 seconds for program to load
+    Sleep, 30 * 1000
+}
 
 ; open Battle.net
-Try {
-    Run, "C:\Program Files (x86)\Blizzard App\Battle.net.exe"
+if !ProcessExist("Battle.net.exe"){
+    Try Run, "C:\Program Files (x86)\Blizzard App\Battle.net.exe"
+    Try Run, "C:\Program Files (x86)\Battle.net\Battle.net.exe"
+    ; wait 30 seconds for program to load
+    Sleep, 30 * 1000
 }
 
-Try {
-    Run, "C:\Program Files (x86)\Battle.net\Battle.net.exe"
-}
+; open Hearthstone
 
-
-; wait 30 seconds for program to load
-Sleep, 30 * 1000
+; bring window to front 
+WinActivate, ahk_exe Battle.net.exe ; will this work if closed to tray???
+; search img hearthstone.png
+; click hearthstone icon on left
+FindClick("hearthstone.png", "o30 r")
+; get window size
+; click 315px from left edge & 70px from window bottom
+; click launch botton
