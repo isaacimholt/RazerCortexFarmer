@@ -11,14 +11,14 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-; run cortex
+; run Razer Cortex
 Run, "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
 
 ; wait 30 seconds for program to load
 Sleep, 30 * 1000
 
-; open battlenet
-Run, ""
+; open Battle.net
+Run, "C:\Program Files (x86)\Blizzard App\Battle.net.exe"
 
 ; wait 30 seconds for program to load
 Sleep, 30 * 1000
