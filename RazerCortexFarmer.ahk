@@ -39,7 +39,7 @@ if !WinExist("ahk_exe Battle.net.exe"){
 WinActivate, ahk_exe Battle.net.exe
 
 ; click hearthstone icon on left
-; (options are: 30 shades of variance allowed, relative window, wait 60s)
+; (options are: 30 shades of variance allowed, relative window, wait 60s, check every 500ms)
 FindClick("hearthstone.png", "o30 r w60000,500")
 
 ; click launch button 300px from left edge & 70px from window bottom
@@ -47,6 +47,30 @@ CoordMode, Mouse, Relative
 WinGetPos, x, y, w, h, ahk_exe Battle.net.exe
 clickheight := h - 70
 Click 300, %clickheight%
+WinWait, ahk_exe Hearthstone.exe
+WinActivate, ahk_exe Hearthstone.exe
+if WinExist("ahk_exe Battle.net.exe"){
+    WinMinimize, ahk_exe Battle.net.exe
+}
+
+
+; --------------- ANTI-AFK ---------------
+
+max_idle := 1000 * 60 * 1
+min_idle := 1000 * 5
+
+Loop {
+    if ( A_TimeIdlePhysical > max_idle ){
+        Loop {
+            if ( A_TimeIdlePhysical < min_idle ){
+                Break
+            }
+            MoveMouseRand()
+            Sleep, %min_idle%
+        }   
+    }
+    Sleep, 1000
+}
 
 
 ; --------------- HELPER FUNCTIONS ---------------
@@ -54,4 +78,10 @@ Click 300, %clickheight%
 ProcessExist(Name){
 	Process,Exist,%Name%
 	return Errorlevel
+}
+
+MoveMouseRand(){
+    Random, ranX, -100, 100
+    Random, ranY, -100, 100
+    mousemove, %ranX%, %ranY%, 100, R
 }
