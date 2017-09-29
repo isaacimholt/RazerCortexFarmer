@@ -11,7 +11,7 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-#Include FindClick.ahk  ; usefull lib for clicking images
+#Include libs\FindClick.ahk  ; usefull lib for clicking images
 
 
 ; --------------- OPEN RAZER CORTEX ---------------
@@ -40,7 +40,7 @@ WinActivate, ahk_exe Battle.net.exe
 
 ; click hearthstone icon on left
 ; (options are: 30 shades of variance allowed, relative window, wait 60s, check every 500ms)
-FindClick("hearthstone.png", "o30 r w60000,500")
+FindClick("imgs\hearthstone.png", "o30 r w60000,500")
 
 ; click launch button 300px from left edge & 70px from window bottom
 CoordMode, Mouse, Relative
