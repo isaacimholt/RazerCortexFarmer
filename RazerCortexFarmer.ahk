@@ -30,6 +30,7 @@ if !WinExist("ahk_exe Battle.net.exe"){
     Try Run, "C:\Program Files (x86)\Blizzard App\Battle.net.exe"
     Try Run, "C:\Program Files (x86)\Battle.net\Battle.net.exe"
     WinWait, ahk_exe Battle.net.exe
+    ; TODO: CHECK WINDOW TITLE AS WELL THERE IS A BUYG WHERE IT COLLIDES WITH OTHER OPEN BLIZZARD WINDOWS
 }
 
 
@@ -48,17 +49,25 @@ WinGetPos, x, y, w, h, ahk_exe Battle.net.exe
 clickheight := h - 70
 Click 300, %clickheight%
 WinWait, ahk_exe Hearthstone.exe
-WinActivate, ahk_exe Hearthstone.exe
+WinActivate, Hearthstone
 if WinExist("ahk_exe Battle.net.exe"){
     WinMinimize, ahk_exe Battle.net.exe
 }
 
 
+; --------------- MAX HOURS ---------------
+
+minute_counter := 0
+MAX_MINUTES := 5 * 60   ; keep game open for 5 hrs max
+SetTimer, TimerCounter, 60000
+
+
 ; --------------- ANTI-AFK ---------------
 
-max_idle := 1000 * 60 * 1
+max_idle := 1000 * 60 * 5
 min_idle := 1000 * 5
 
+;TODO: implement with timers
 Loop {
     if ( A_TimeIdlePhysical > max_idle ){
         Loop {
@@ -66,10 +75,12 @@ Loop {
                 Break
             }
             MoveMouseRand()
+
             Sleep, %min_idle%
         }   
     }
     Sleep, 1000
+
 }
 
 
@@ -85,3 +96,16 @@ MoveMouseRand(){
     Random, ranY, -100, 100
     mousemove, %ranX%, %ranY%, 100, R
 }
+
+TimerCounter:
+    IfWinExist, Hearthstone
+    {
+        minute_counter += 1
+    }
+    if ( minute_counter > MAX_MINUTES ){
+        SetTimer, TimerCounter, off
+        TrayTip, info, %minute_counter%
+        WinClose, Hearthstone
+        ExitApp
+    }
+Return
