@@ -48,12 +48,11 @@ if !WinExist("Blizzard App"){
 
     if (battlenet_path == "ERROR"){
 
-        path_array := [
-            "C:\Program Files (x86)\Blizzard App\Battle.net.exe",
-            "C:\Program Files\Blizzard App\Battle.net.exe",
-            "C:\Program Files (x86)\Battle.net\Battle.net.exe",
-            "C:\Program Files\Battle.net\Battle.net.exe"
-        ]
+        path_array := []
+        path_array[1] := "C:\Program Files (x86)\Blizzard App\Battle.net.exe"
+        path_array[2] := "C:\Program Files\Blizzard App\Battle.net.exe"
+        path_array[3] := "C:\Program Files (x86)\Battle.net\Battle.net.exe"
+        path_array[4] := "C:\Program Files\Battle.net\Battle.net.exe"
 
         for index, path in path_array{
             if FileExist(path){
