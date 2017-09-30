@@ -17,10 +17,25 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ; --------------- OPEN RAZER CORTEX ---------------
 
 if !WinExist("Razer Cortex"){
-    Try Run, "C:\Program Files\Razer\Razer Cortex\CortexLauncher.exe"
-    Try Run, "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
-    WinWait, "Razer Cortex"
-    WinClose, "Razer Cortex"
+    
+    IniRead, cortex_path, config.ini, Path, Cortex
+
+    if (cortex_path = "ERROR") {
+        
+        if FileExist("C:\Program Files\Razer\Razer Cortex\CortexLauncher.exe"){
+            cortex_path := "C:\Program Files\Razer\Razer Cortex\CortexLauncher.exe"
+        } else if FileExist("C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"){
+            cortex_path := "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
+        } else { 
+            FileSelectFile, cortex_path, 3, , Select Cortex Launcher, Executables (*.exe)
+        }
+
+        IniWrite, %cortex_path%, config.ini, Path, Cortex
+    }
+    Run, %cortex_path%
+    
+    WinWait, Razer Cortex
+    WinClose, Razer Cortex
 }
 
 
@@ -33,14 +48,14 @@ if !WinExist("Blizzard App"){
     Try Run, "C:\Program Files (x86)\Battle.net\Battle.net.exe"
     Try Run, "C:\Program Files\Battle.net\Battle.net.exe"
     Try Run, "D:\Games\Blizzard App\Battle.net.exe"     ; rlly need to use registry
-    WinWait, "Blizzard App"
+    WinWait, Blizzard App
 }
 
 
 ; --------------- OPEN HEARTHSTONE ---------------
 
 ; bring battle.net to front 
-WinActivate, "Blizzard App"
+WinActivate, Blizzard App
 
 ; click hearthstone icon on left
 ; (options are: 30 shades of variance allowed, relative window, wait 60s, check every 500ms)
