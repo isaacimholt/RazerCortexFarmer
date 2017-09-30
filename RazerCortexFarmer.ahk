@@ -19,8 +19,8 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 if !WinExist("Razer Cortex"){
     Try Run, "C:\Program Files\Razer\Razer Cortex\CortexLauncher.exe"
     Try Run, "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
-    WinWait, Razer Cortex
-    WinClose, Razer Cortex
+    WinWait, "Razer Cortex"
+    WinClose, "Razer Cortex"
 }
 
 
@@ -32,14 +32,14 @@ if !WinExist("Blizzard App"){
     Try Run, "C:\Program Files\Blizzard App\Battle.net.exe"
     Try Run, "C:\Program Files (x86)\Battle.net\Battle.net.exe"
     Try Run, "C:\Program Files\Battle.net\Battle.net.exe"
-    WinWait, Blizzard App
+    WinWait, "Blizzard App"
 }
 
 
 ; --------------- OPEN HEARTHSTONE ---------------
 
 ; bring battle.net to front 
-WinActivate, Blizzard App
+WinActivate, "Blizzard App"
 
 ; click hearthstone icon on left
 ; (options are: 30 shades of variance allowed, relative window, wait 60s, check every 500ms)
