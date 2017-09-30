@@ -16,7 +16,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ; --------------- OPEN RAZER CORTEX ---------------
 
-if !ProcessExist("RazerCortex.exe"){
+if !WinExist("Razer Cortex"){
     Try Run, "C:\Program Files\Razer\Razer Cortex\CortexLauncher.exe"
     Try Run, "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
     WinWait, ahk_exe RazerCortex.exe
@@ -87,11 +87,6 @@ Loop {
 
 
 ; --------------- HELPER FUNCTIONS ---------------
-
-ProcessExist(Name){
-	Process,Exist,%Name%
-	return Errorlevel
-}
 
 MoveMouseRand(){
     Random, ranX, -100, 100
