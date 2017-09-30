@@ -19,8 +19,8 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 if !WinExist("Razer Cortex"){
     Try Run, "C:\Program Files\Razer\Razer Cortex\CortexLauncher.exe"
     Try Run, "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
-    WinWait, ahk_exe RazerCortex.exe
-    WinClose, ahk_exe RazerCortex.exe
+    WinWait, Razer Cortex
+    WinClose, Razer Cortex
 }
 
 
