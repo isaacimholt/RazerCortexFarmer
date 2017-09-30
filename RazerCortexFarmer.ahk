@@ -27,6 +27,7 @@ if !WinExist("Razer Cortex"){
         } else if FileExist("C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"){
             cortex_path := "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
         } else { 
+            MsgBox % "Please select the Cortex Launcher executable"
             FileSelectFile, cortex_path, 3, , Select Cortex Launcher, Executables (*.exe)
         }
 
@@ -61,6 +62,7 @@ if !WinExist("Blizzard App"){
         }
 
         if (battlenet_path == "ERROR"){
+            MsgBox % "Please select the Battle.net.exe file"
             FileSelectFile, battlenet_path, 3, , Select Battle.net.exe, Executables (*.exe)
         }
         
