@@ -36,7 +36,7 @@ if !WinExist("Razer Cortex"){
         }
 
         ; save the file location for next time
-        IniWrite, %cortex_path%, config.ini, Path, Cortex
+        IniWrite, %cortex_path%, config.ini, Paths, Cortex
     }
 
     ; open the file
