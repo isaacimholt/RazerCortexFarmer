@@ -17,10 +17,6 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ; --------------- OPEN RAZER CORTEX ---------------
 
 if !WinExist("Razer Cortex"){
-<<<<<<< HEAD
-    Try Run, "C:\Program Files\Razer\Razer Cortex\CortexLauncher.exe"
-    Try Run, "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
-=======
     
     IniRead, cortex_path, config.ini, Path, Cortex
 
@@ -38,7 +34,6 @@ if !WinExist("Razer Cortex"){
     }
     Run, %cortex_path%
     
->>>>>>> c0a41fedb793ad6111a48cc4595426641a376e5f
     WinWait, Razer Cortex
     WinClose, Razer Cortex
 }
@@ -48,23 +43,25 @@ if !WinExist("Razer Cortex"){
 
 ; (using WinExist to open from systray too)
 if !WinExist("Blizzard App"){
-<<<<<<< HEAD
 
     IniRead, battlenet_path, config.ini, Paths, BattleNet
 
     if (battlenet_path == "ERROR"){
 
-        if FileExist("C:\Program Files (x86)\Blizzard App\Battle.net.exe"){
-            battlenet_path := "C:\Program Files (x86)\Blizzard App\Battle.net.exe"
-        } else if FileExist("C:\Program Files\Blizzard App\Battle.net.exe"){
-            battlenet_path := "C:\Program Files\Blizzard App\Battle.net.exe"
-        } else if FileExist("C:\Program Files (x86)\Battle.net\Battle.net.exe"){
-            battlenet_path := "C:\Program Files (x86)\Battle.net\Battle.net.exe"
-        } else if FileExist("C:\Program Files\Battle.net\Battle.net.exe"){
-            battlenet_path := "C:\Program Files\Battle.net\Battle.net.exe"
-        } else if FileExist("D:\Games\Blizzard App\Battle.net.exe"){
-            battlenet_path := "D:\Games\Blizzard App\Battle.net.exe"
-        } else {
+        path_array := [
+            "C:\Program Files (x86)\Blizzard App\Battle.net.exe",
+            "C:\Program Files\Blizzard App\Battle.net.exe",
+            "C:\Program Files (x86)\Battle.net\Battle.net.exe",
+            "C:\Program Files\Battle.net\Battle.net.exe"
+        ]
+
+        for index, path in path_array{
+            if FileExist(path){
+                battlenet_path := path
+            }
+        }
+
+        if (battlenet_path == "ERROR"){
             FileSelectFile, battlenet_path, 3, , Select Battle.net.exe, Executables (*.exe)
         }
         
@@ -73,13 +70,6 @@ if !WinExist("Blizzard App"){
     
     Run, %battlenet_path%
 
-=======
-    Try Run, "C:\Program Files (x86)\Blizzard App\Battle.net.exe"
-    Try Run, "C:\Program Files\Blizzard App\Battle.net.exe"
-    Try Run, "C:\Program Files (x86)\Battle.net\Battle.net.exe"
-    Try Run, "C:\Program Files\Battle.net\Battle.net.exe"
-    Try Run, "D:\Games\Blizzard App\Battle.net.exe"     ; rlly need to use registry
->>>>>>> c0a41fedb793ad6111a48cc4595426641a376e5f
     WinWait, Blizzard App
 }
 
