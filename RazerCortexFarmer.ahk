@@ -17,7 +17,8 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 ; --------------- OPEN RAZER CORTEX ---------------
 
 if !ProcessExist("RazerCortex.exe"){
-    Run, "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
+    Try Run, "C:\Program Files\Razer\Razer Cortex\CortexLauncher.exe"
+    Try Run, "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
     WinWait, ahk_exe RazerCortex.exe
     WinClose, ahk_exe RazerCortex.exe
 }
@@ -28,7 +29,9 @@ if !ProcessExist("RazerCortex.exe"){
 ; (using WinExist to open from systray too)
 if !WinExist("Blizzard App"){
     Try Run, "C:\Program Files (x86)\Blizzard App\Battle.net.exe"
+    Try Run, "C:\Program Files\Blizzard App\Battle.net.exe"
     Try Run, "C:\Program Files (x86)\Battle.net\Battle.net.exe"
+    Try Run, "C:\Program Files\Battle.net\Battle.net.exe"
     WinWait, Blizzard App
 }
 
@@ -108,3 +111,11 @@ TimerCounter:
         ExitApp
     }
 Return
+
+ProgramFiles32() {
+   If (A_Is64bitOS)
+      EnvGet, PF32, ProgramFiles(x86)
+   Else
+      PF32 := A_ProgramFiles
+   Return PF32
+}
