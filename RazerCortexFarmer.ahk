@@ -26,18 +26,18 @@ if !ProcessExist("RazerCortex.exe"){
 ; --------------- OPEN BATTLE.NET ---------------
 
 ; (using WinExist to open from systray too)
-if !WinExist("ahk_exe Battle.net.exe"){
+if !WinExist("Blizzard App"){
     Try Run, "C:\Program Files (x86)\Blizzard App\Battle.net.exe"
     Try Run, "C:\Program Files (x86)\Battle.net\Battle.net.exe"
-    WinWait, ahk_exe Battle.net.exe
-    ; TODO: CHECK WINDOW TITLE AS WELL THERE IS A BUYG WHERE IT COLLIDES WITH OTHER OPEN BLIZZARD WINDOWS
+    WinWait, Blizzard App
+    ; TODO: CHECK WINDOW TITLE AS WELL THERE IS A BUYG WHERE IT COLLIDES WITH OTHER OPEN BLIZZARD WINDOWS SUCH AS FRIENDS LIST
 }
 
 
 ; --------------- OPEN HEARTHSTONE ---------------
 
 ; bring battle.net to front 
-WinActivate, ahk_exe Battle.net.exe
+WinActivate, Blizzard App
 
 ; click hearthstone icon on left
 ; (options are: 30 shades of variance allowed, relative window, wait 60s, check every 500ms)
@@ -45,13 +45,13 @@ FindClick("imgs\hearthstone.png", "o30 r w60000,500")
 
 ; click launch button 300px from left edge & 70px from window bottom
 CoordMode, Mouse, Relative
-WinGetPos, x, y, w, h, ahk_exe Battle.net.exe
+WinGetPos, x, y, w, h, Blizzard App
 clickheight := h - 70
 Click 300, %clickheight%
-WinWait, ahk_exe Hearthstone.exe
+WinWait, Hearthstone
 WinActivate, Hearthstone
-if WinExist("ahk_exe Battle.net.exe"){
-    WinMinimize, ahk_exe Battle.net.exe
+if WinExist("Blizzard App"){
+    WinMinimize, Blizzard App
 }
 
 
