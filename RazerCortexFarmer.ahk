@@ -16,23 +16,30 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ; --------------- OPEN RAZER CORTEX ---------------
 
+; (using WinExist to open from systray too)
 if !WinExist("Razer Cortex"){
     
+    ; check if there is existing path
     IniRead, cortex_path, config.ini, Path, Cortex
 
-    if (cortex_path = "ERROR") {
+    ; if not, we try some default locations looking for the .exe
+    if (cortex_path == "ERROR") {
         
         if FileExist("C:\Program Files\Razer\Razer Cortex\CortexLauncher.exe"){
             cortex_path := "C:\Program Files\Razer\Razer Cortex\CortexLauncher.exe"
         } else if FileExist("C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"){
             cortex_path := "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
         } else { 
+            ; if we've still not found the file, then have user select it
             MsgBox % "Please select the Cortex Launcher executable"
             FileSelectFile, cortex_path, 3, , Select Cortex Launcher, Executables (*.exe)
         }
 
+        ; save the file location for next time
         IniWrite, %cortex_path%, config.ini, Path, Cortex
     }
+
+    ; open the file
     Run, %cortex_path%
     
     WinWait, Razer Cortex
@@ -45,32 +52,39 @@ if !WinExist("Razer Cortex"){
 ; (using WinExist to open from systray too)
 if !WinExist("Blizzard App"){
 
+    ; check if there is existing path
     IniRead, battlenet_path, config.ini, Paths, BattleNet
 
+    ; if not, we try some default locations looking for the .exe
     if (battlenet_path == "ERROR"){
 
         path_array := []
-        path_array[1] := "C:\Program Files (x86)\Blizzard App\Battle.net.exe"
-        path_array[2] := "C:\Program Files\Blizzard App\Battle.net.exe"
-        path_array[3] := "C:\Program Files (x86)\Battle.net\Battle.net.exe"
-        path_array[4] := "C:\Program Files\Battle.net\Battle.net.exe"
+        path_array[1] := "C:\Program Files\Blizzard App\Battle.net.exe"
+        path_array[2] := "C:\Program Files (x86)\Blizzard App\Battle.net.exe"
+        path_array[3] := "C:\Program Files\Battle.net\Battle.net.exe"
+        path_array[4] := "C:\Program Files (x86)\Battle.net\Battle.net.exe"
 
         for index, path in path_array{
+
+            ; check if this file exists
             if FileExist(path){
                 battlenet_path := path
+                Break
             }
         }
 
+        ; if we've still not found the file, then have user select it
         if (battlenet_path == "ERROR"){
             MsgBox % "Please select the Battle.net.exe file"
             FileSelectFile, battlenet_path, 3, , Select Battle.net.exe, Executables (*.exe)
         }
         
+        ; save the file location for next time
         IniWrite, %battlenet_path%, config.ini, Paths, BattleNet
     }
     
+    ; open the file
     Run, %battlenet_path%
-
     WinWait, Blizzard App
 }
 
