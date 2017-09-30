@@ -32,6 +32,7 @@ if !WinExist("Blizzard App"){
     Try Run, "C:\Program Files\Blizzard App\Battle.net.exe"
     Try Run, "C:\Program Files (x86)\Battle.net\Battle.net.exe"
     Try Run, "C:\Program Files\Battle.net\Battle.net.exe"
+    Try Run, "D:\Games\Blizzard App\Battle.net.exe"     ; rlly need to use registry
     WinWait, "Blizzard App"
 }
 
