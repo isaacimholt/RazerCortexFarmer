@@ -30,7 +30,6 @@ if !WinExist("Blizzard App"){
     Try Run, "C:\Program Files (x86)\Blizzard App\Battle.net.exe"
     Try Run, "C:\Program Files (x86)\Battle.net\Battle.net.exe"
     WinWait, Blizzard App
-    ; TODO: CHECK WINDOW TITLE AS WELL THERE IS A BUYG WHERE IT COLLIDES WITH OTHER OPEN BLIZZARD WINDOWS SUCH AS FRIENDS LIST
 }
 
 
