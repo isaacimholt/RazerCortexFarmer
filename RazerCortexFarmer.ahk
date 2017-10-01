@@ -41,9 +41,9 @@ if !WinExist("Razer Cortex"){
             FileSelectFile, cortex_path, 3, , Select Cortex Launcher, Executables (*.exe)
         }
 
-        ; save the file location for next time
-        IniWrite, %cortex_path%, config.ini, Paths, Cortex
-    }
+    ; save the file location for next time
+    IniWrite, %cortex_path%, config.ini, Paths, Cortex
+    
 
     ; open the file
     Run, %cortex_path%
