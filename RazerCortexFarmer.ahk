@@ -165,11 +165,3 @@ TimerCounter:
         ExitApp
     }
 Return
-
-ProgramFiles32() {
-   If (A_Is64bitOS)
-      EnvGet, PF32, ProgramFiles(x86)
-   Else
-      PF32 := A_ProgramFiles
-   Return PF32
-}
