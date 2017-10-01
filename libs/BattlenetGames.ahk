@@ -4,7 +4,7 @@
 
 open_battlenet(){
     ; (using WinExist to open from systray too)
-    if !WinExist("Blizzard App"){
+    if !WinExist("Blizzard"){
 
         ; check if there is existing path
         IniRead, battlenet_path, config.ini, Paths, BattleNet
@@ -39,9 +39,9 @@ open_battlenet(){
         
         ; open the file
         Run, %battlenet_path%
-        WinWait, Blizzard App
+        WinWait, Blizzard
     }
-    WinActivate, Blizzard App
+    WinActivate, Blizzard
 }
 
 
@@ -71,8 +71,8 @@ open_battlenet_game(game_window_title, launcher_img){
 
     WinWait, %game_window_title%
     WinActivate, %game_window_title%
-    if WinExist("Blizzard App"){
-        WinMinimize, Blizzard App
+    if WinExist("Blizzard"){
+        WinMinimize, Blizzard
     }
 }
 
