@@ -67,7 +67,7 @@ open_battlenet_game(game_window_title, launcher_img){
     FindClick(launcher_img, "oTransBlack,30 r w60000,500")
 
     ; click play button
-    FindClick("imgs\playbutton.png", "oTransBlack,10 r w60000,500")
+    FindClick("imgs\playbutton.png", "oTransBlack,50 r w60000,500")
 
     WinWait, %game_window_title%
     WinActivate, %game_window_title%
