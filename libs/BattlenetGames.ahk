@@ -47,27 +47,14 @@ open_battlenet(){
 
 ; --------------- OPEN BATTLENET GAME ---------------
 
+; https://us.battle.net/forums/en/wow/topic/20742815763
 
-open_battlenet_game(game_window_title, launcher_img){
+open_battlenet_game(game_window_title, game_code){
 
     ; make sure battlenet is running and active
     open_battlenet()
 
-    /*
-      FINDCLICK OPTIONS
-      'o' means start of ahk ImageSearch command options
-      'TransBlack' is used to make black count as transparent
-      for .png this makes transparency work
-      o30:  allow 30 shades of variance
-      r:    search relative to window
-      w60000,500: wait 60s and check every 500ms
-    */
-
-    ; click game icon on left
-    FindClick(launcher_img, "oTransBlack,30 r w60000,500")
-
-    ; click play button
-    FindClick("imgs\playbutton.png", "oTransBlack,50 r w60000,500")
+    Run battlenet://WTGC
 
     WinWait, %game_window_title%
     WinActivate, %game_window_title%

@@ -58,7 +58,7 @@ if !WinExist("Razer Cortex"){
 
 ; --------------- RUN GAMES ---------------
 
-open_battlenet_game("Hearthstone", "imgs\hearthstone.png")
+open_battlenet_game("Hearthstone", "WTGC")
 ; open_battlenet_game("Overwatch", "imgs\overwatch.png")
 ; open_battlenet_game("Diablo", "imgs\diablo3.png")
 ; etc
