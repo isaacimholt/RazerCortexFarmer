@@ -53,9 +53,8 @@ open_battlenet_game(game_window_title, launcher_img){
     ; make sure battlenet is running and active
     open_battlenet()
 
-    ; click game icon on left
-
     /*
+      FINDCLICK OPTIONS
       'o' means start of ahk ImageSearch command options
       'TransBlack' is used to make black count as transparent
       for .png this makes transparency work
@@ -63,13 +62,13 @@ open_battlenet_game(game_window_title, launcher_img){
       r:    search relative to window
       w60000,500: wait 60s and check every 500ms
     */
+
+    ; click game icon on left
     FindClick(launcher_img, "oTransBlack,30 r w60000,500")
 
-    ; click launch button 300px from left edge & 70px from window bottom
-    CoordMode, Mouse, Relative
-    WinGetPos, x, y, w, h, Blizzard App
-    clickheight := h - 70
-    Click 300, %clickheight%
+    ; click play button
+    FindClick("imgs\playbutton.png", "oTransBlack,10 r w60000,500")
+
     WinWait, %game_window_title%
     WinActivate, %game_window_title%
     if WinExist("Blizzard App"){
