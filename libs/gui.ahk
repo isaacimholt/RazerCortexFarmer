@@ -19,6 +19,7 @@ select_game_gui(){
     return GameChoice
 
     GuiClose:
+        ExitApp
     ButtonOK:
         Gui, Submit 
         GuiControlGet, GameChoice
