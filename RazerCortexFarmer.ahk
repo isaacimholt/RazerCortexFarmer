@@ -15,6 +15,12 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 #Include libs\FindClick.ahk         ; useful lib for clicking images
 #Include libs\BattlenetGames.ahk
+#Include libs\gui.ahk
+
+
+; --------------- OPEN GUI ---------------
+
+game_choice := select_game_gui()
 
 
 ; --------------- OPEN RAZER CORTEX ---------------
@@ -58,10 +64,15 @@ if !WinExist("Razer Cortex"){
 
 ; --------------- RUN GAMES ---------------
 
-; open_battlenet_game("Hearthstone", "WTCG")
-; open_battlenet_game("Overwatch", "Pro")
-open_battlenet_game("Diablo", "D3")
-; etc
+if (game_choice == "Hearthstone") {
+    open_battlenet_game("Hearthstone", "WTCG")
+} else if (game_choice == "Diablo 3") {
+    open_battlenet_game("Diablo", "D3")
+} else if (game_choice == "Overwatch") {
+    open_battlenet_game("Overwatch", "Pro")
+} else {
+    MsgBox % "ah stronzo che cazzo hai fatto nn esiste sto gioco di merda"
+}
 
 
 ; --------------- MAX HOURS ---------------
