@@ -4,7 +4,7 @@
 
 open_battlenet(){
     ; (using WinExist to open from systray too)
-    if !WinExist("Blizzard"){
+    if !WinExist("ahk_exe Battle.net.exe"){
 
         ; check if there is existing path
         IniRead, battlenet_path, config.ini, Paths, BattleNet
@@ -39,7 +39,7 @@ open_battlenet(){
         
         ; open the file
         Run, %battlenet_path%
-        WinWait, Blizzard
+        WinWait, ahk_exe Battle.net.exe
     }
     ;WinActivate, Blizzard
 }
@@ -51,7 +51,7 @@ open_battlenet(){
 open_battlenet_game(game_window_title, game_code){
 
     ; make sure battlenet is running and active
-    ;open_battlenet()
+    open_battlenet()
 
     ;Run, battlenet
     shell:=ComObjCreate("Shell.Application")
@@ -63,8 +63,8 @@ open_battlenet_game(game_window_title, game_code){
     
     WinWait, %game_window_title%
     WinActivate, %game_window_title%
-    if WinExist("Blizzard"){
-        WinMinimize, Blizzard
+    if WinExist("ahk_exe Battle.net.exe"){
+        WinMinimize, ahk_exe Battle.net.exe
     }
 }
 
