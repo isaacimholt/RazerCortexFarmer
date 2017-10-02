@@ -8,6 +8,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 select_game_gui(){
     global
     local vGameChoice
+    ; Read last game choosen
     IniRead, N, config.ini, DefaultGame, Game, [1]
     Gui Show, w300 h150, Select Game to idle
     Gui, Add, Text, x100 y20 w100 h23 Center,Select a game to idle
@@ -23,7 +24,9 @@ select_game_gui(){
     ButtonOK:
         Gui, Submit 
         GuiControlGet, GameChoice
+        ; Read game index
         IniRead, index, data/games.ini, GameList, %GameChoice%
+        ; Save game index
         IniWrite, %index%, config.ini, DefaultGame, Game
         return GameChoice
 }
