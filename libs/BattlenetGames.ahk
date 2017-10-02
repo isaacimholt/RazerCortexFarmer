@@ -41,9 +41,8 @@ open_battlenet(){
         Run, %battlenet_path%
         WinWait, Blizzard
     }
-    WinActivate, Blizzard
+    ;WinActivate, Blizzard
 }
-
 
 ; --------------- OPEN BATTLENET GAME ---------------
 
@@ -52,10 +51,25 @@ open_battlenet(){
 open_battlenet_game(game_window_title, game_code){
 
     ; make sure battlenet is running and active
-    open_battlenet()
+    ;open_battlenet()
 
-    Run battlenet://WTGC
-
+    ;Run, battlenet
+    shell:=ComObjCreate("Shell.Application")
+    shell.FileRun()
+    
+    WinWait %shell%
+    Send {Raw} battlenet://%game_code%
+    Send {ENTER}
+    
+    WinWait, Blizzard
+    ;Run, battlenet
+    shell:=ComObjCreate("Shell.Application")
+    shell.FileRun()
+    
+    WinWait %shell%
+    Send {Raw} battlenet://%game_code%
+    Send {ENTER}
+    
     WinWait, %game_window_title%
     WinActivate, %game_window_title%
     if WinExist("Blizzard"){
