@@ -84,6 +84,7 @@ SetTimer, TimerCounter, 60000
 
 ; --------------- ANTI-AFK ---------------
 
+; 1sec * sec * min
 max_idle := 1000 * 60 * 5
 min_idle := 1000 * 5
 

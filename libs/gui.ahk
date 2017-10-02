@@ -9,7 +9,7 @@ select_game_gui(){
     global
     local vGameChoice
     Gui Show, w300 h150, Select Game to idle
-    Gui, Add, Text, x10 y10 w90 Center,text here 
+    Gui, Add, Text, x10 y10 w120 Center,Select a game to idle
     Gui Add, DropDownList, vGameChoice, Hearthstone|Diablo III|Overwatch
     Gui Add, Button, x110 y80 w80 h23, &OK
     Gui, +LastFound
@@ -19,7 +19,7 @@ select_game_gui(){
 
     GuiClose:
     ButtonOK:
-    Gui, Submit 
-    GuiControlGet, GameChoice 
-    return GameChoice
+        Gui, Submit 
+        GuiControlGet, GameChoice 
+        return GameChoice
 }
