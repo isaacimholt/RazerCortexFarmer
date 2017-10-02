@@ -10,7 +10,7 @@ select_game_gui(){
     local vGameChoice
     Gui Show, w300 h150, Select Game to idle
     Gui, Add, Text, x10 y10 w90 Center,text here 
-    Gui Add, DropDownList, vGameChoice, Hearthstone|Diablo 3|Overwatch
+    Gui Add, DropDownList, vGameChoice, Hearthstone|Diablo III|Overwatch
     Gui Add, Button, x110 y80 w80 h23, &OK
     Gui, +LastFound
     GuiHWND := WinExist()
