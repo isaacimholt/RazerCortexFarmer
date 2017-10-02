@@ -25,11 +25,9 @@ strFile := A_ScriptDir . "\data\games.csv"
 strFields := "" ; this will contain the field names after loading csv
 game_data := ObjCSV_CSV2Collection(strFile, strFields)
 
-
 ; --------------- OPEN GUI ---------------
 
 game_choice := select_game_gui(game_data)
-
 
 ; --------------- OPEN RAZER CORTEX ---------------
 
@@ -69,26 +67,17 @@ if !WinExist("Razer Cortex"){
     WinClose, Razer Cortex
 }
 
-
 ; --------------- RUN GAMES ---------------
 
-if (game_choice == "Hearthstone") {
-    open_battlenet_game("Hearthstone", "WTCG")
-} else if (game_choice == "Diablo3") {
-    open_battlenet_game("Diablo III", "D3")
-} else if (game_choice == "Overwatch") {
-    open_battlenet_game("Overwatch", "Pro")
-} else {
-    MsgBox % "Ah stronzo che cazzo hai fatto, non esiste sto gioco di merda"
+if (game_data[game_choice].source == BattleNet) {
+    open_battlenet_game(game_data[game_choice].game_name, game_data[game_choice].game_code)
 }
-
 
 ; --------------- MAX HOURS ---------------
 
 minute_counter := 0
 MAX_MINUTES := 5 * 60   ; keep game open for 5 hrs max
 SetTimer, TimerCounter, 60000
-
 
 ; --------------- ANTI-AFK ---------------
 
@@ -111,7 +100,6 @@ Loop {
     Sleep, 1000
 
 }
-
 
 ; --------------- HELPER FUNCTIONS ---------------
 
