@@ -1,4 +1,4 @@
-# Razer Cortex Farmer
+<img src="https://imgur.com/tSHitWS.png" width="35" height="35"> Razer Cortex Farmer
 
 AutoHotKey script to automatically open **Razer Cortex**, a game of your choice (*form a list of supported games*) 
 **// pls milo fallo tu sto pezzo**
