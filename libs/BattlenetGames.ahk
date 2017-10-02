@@ -61,15 +61,6 @@ open_battlenet_game(game_window_title, game_code){
     Send {Raw} battlenet://%game_code%
     Send {ENTER}
     
-    WinWait, Blizzard
-    ;Run, battlenet
-    shell:=ComObjCreate("Shell.Application")
-    shell.FileRun()
-    
-    WinWait %shell%
-    Send {Raw} battlenet://%game_code%
-    Send {ENTER}
-    
     WinWait, %game_window_title%
     WinActivate, %game_window_title%
     if WinExist("Blizzard"){
