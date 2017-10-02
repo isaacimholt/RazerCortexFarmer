@@ -8,11 +8,14 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 select_game_gui(){
     global
     local vGameChoice
-    Gui, Show , w200 h200, Select Game to idle
+    Gui Show, w300 h150, Select Game to idle
     Gui, Add, Text, x10 y10 w90 Center,text here 
-    Gui, Add, DropDownList, vGameChoice, Hearthstone|Diablo 3|Overwatch
-    Gui, Add, Button, default, OK
-    return
+    Gui Add, DropDownList, vGameChoice, Hearthstone|Diablo 3|Overwatch
+    Gui Add, Button, x110 y80 w80 h23, &OK
+    Gui, +LastFound
+    GuiHWND := WinExist()
+    WinWaitClose, ahk_id %GuiHWND%  ;--waiting for gui to close
+    return GameChoice
 
     GuiClose:
     ButtonOK:
