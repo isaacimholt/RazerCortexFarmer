@@ -60,7 +60,7 @@ if !WinExist("Razer Cortex"){
 
 ; open_battlenet_game("Hearthstone", "WTCG")
 ; open_battlenet_game("Overwatch", "Pro")
-open_battlenet_game("Diablo", "D3")
+open_battlenet_game("Diablo III", "D3")
 ; etc
 
 
