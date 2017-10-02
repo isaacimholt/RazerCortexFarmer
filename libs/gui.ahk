@@ -36,8 +36,16 @@ select_game_gui(game_data){
         Gui, Submit 
         GuiControlGet, GameChoice
         ; Read game index
-        IniRead, index, data/games.ini, GameList, %GameChoice%
+        index := 1
+        loop, % game_data.MaxIndex()
+        {
+            if GameChoice == game_data[A_Index].game_name{
+                index := A_Index
+                Break
+            }
+                
+        }
         ; Save game index
         IniWrite, %index%, data/config.ini, DefaultGame, Game
-        return GameChoice
+        return index
 }
