@@ -8,9 +8,10 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 select_game_gui(){
     global
     local vGameChoice
+    IniRead, N, config.ini, DefaultGame, Game, [1]
     Gui Show, w300 h150, Select Game to idle
     Gui, Add, Text, x100 y20 w100 h23 Center,Select a game to idle
-    Gui Add, DropDownList, x90 y50 vGameChoice, Hearthstone|Diablo III|Overwatch
+    Gui Add, DropDownList, x90 y50 Choose%N% vGameChoice, Hearthstone||Diablo3|Overwatch
     Gui Add, Button, x110 y80 w80 h23, &OK
     Gui, +LastFound
     GuiHWND := WinExist()
@@ -20,6 +21,8 @@ select_game_gui(){
     GuiClose:
     ButtonOK:
         Gui, Submit 
-        GuiControlGet, GameChoice 
+        GuiControlGet, GameChoice
+        IniRead, index, data/games.ini, GameList, %GameChoice%
+        IniWrite, %index%, config.ini, DefaultGame, Game
         return GameChoice
 }
