@@ -34,9 +34,7 @@ select_game_gui(game_data){
         ExitApp
     ButtonOK:
         Gui, Submit 
-        GuiControlGet, GameChoice
-        ; Read game index
-        IniRead, index, data/games.ini, GameList, %GameChoice%
+        GuiControlGet, GameChoice        
         ; Save game index
         IniWrite, %index%, data/config.ini, DefaultGame, Game
         return GameChoice
