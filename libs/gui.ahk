@@ -28,7 +28,7 @@ select_game_gui(game_data){
     Gui, +LastFound
     GuiHWND := WinExist()
     WinWaitClose, ahk_id %GuiHWND%  ;--waiting for gui to close
-    return
+    return index
 
     GuiClose:
         ExitApp
@@ -37,13 +37,11 @@ select_game_gui(game_data){
         GuiControlGet, GameChoice
         ; Read game index
         index := 1
-        loop, % game_data.MaxIndex()
-        {
+        loop, % game_data.MaxIndex() {
             if (GameChoice == game_data[A_Index].game_name) {
                 index := A_Index
                 Break
             }
-                
         }
         ; Save game index
         IniWrite, %index%, data/config.ini, DefaultGame, Game
