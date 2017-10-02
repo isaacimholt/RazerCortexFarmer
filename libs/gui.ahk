@@ -7,7 +7,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 select_game_gui(game_data){
     global
-    local vGameChoice
+    local vGameChoice, index
 
     dropdown_list_values := ""
     loop, % game_data.MaxIndex()
@@ -28,7 +28,7 @@ select_game_gui(game_data){
     Gui, +LastFound
     GuiHWND := WinExist()
     WinWaitClose, ahk_id %GuiHWND%  ;--waiting for gui to close
-    return GameChoice
+    return
 
     GuiClose:
         ExitApp
@@ -39,7 +39,7 @@ select_game_gui(game_data){
         index := 1
         loop, % game_data.MaxIndex()
         {
-            if GameChoice == game_data[A_Index].game_name{
+            if (GameChoice == game_data[A_Index].game_name) {
                 index := A_Index
                 Break
             }
