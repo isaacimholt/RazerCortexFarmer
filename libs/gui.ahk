@@ -9,7 +9,7 @@ select_game_gui(){
     global
     local vGameChoice
     ; Read last game choosen
-    IniRead, N, config.ini, DefaultGame, Game, [1]
+    IniRead, N, data/config.ini, DefaultGame, Game, [1]
     Gui Show, w300 h150, Select Game to idle
     Gui, Add, Text, x100 y20 w100 h23 Center,Select a game to idle
     Gui Add, DropDownList, x90 y50 Choose%N% vGameChoice, Hearthstone||Diablo3|Overwatch
@@ -27,6 +27,6 @@ select_game_gui(){
         ; Read game index
         IniRead, index, data/games.ini, GameList, %GameChoice%
         ; Save game index
-        IniWrite, %index%, config.ini, DefaultGame, Game
+        IniWrite, %index%, data/config.ini, DefaultGame, Game
         return GameChoice
 }

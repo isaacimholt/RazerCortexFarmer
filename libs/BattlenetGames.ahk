@@ -7,7 +7,7 @@ open_battlenet(){
     if !WinExist("ahk_exe Battle.net.exe"){
 
         ; check if there is existing path
-        IniRead, battlenet_path, config.ini, Paths, BattleNet
+        IniRead, battlenet_path, data/config.ini, Paths, BattleNet
 
         ; if not, we try some default locations looking for the .exe
         if (battlenet_path == "ERROR"){
@@ -34,7 +34,7 @@ open_battlenet(){
             }
             
             ; save the file location for next time
-            IniWrite, %battlenet_path%, config.ini, Paths, BattleNet
+            IniWrite, %battlenet_path%, data/config.ini, Paths, BattleNet
         }
         
         ; open the file

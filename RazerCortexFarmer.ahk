@@ -29,7 +29,7 @@ game_choice := select_game_gui()
 if !WinExist("Razer Cortex"){
     
     ; check if there is existing path
-    IniRead, cortex_path, config.ini, Paths, Cortex
+    IniRead, cortex_path, data/config.ini, Paths, Cortex
 
     path_array := []
         path_array[1] := "C:\Program Files\Razer\Razer Cortex\CortexLauncher.exe"
@@ -51,7 +51,7 @@ if !WinExist("Razer Cortex"){
         }
 
     ; save the file location for next time
-    IniWrite, %cortex_path%, config.ini, Paths, Cortex
+    IniWrite, %cortex_path%, data/config.ini, Paths, Cortex
     
 
     ; open the file
