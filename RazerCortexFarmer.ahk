@@ -16,11 +16,19 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #Include libs\FindClick.ahk         ; useful lib for clicking images
 #Include libs\BattlenetGames.ahk
 #Include libs\gui.ahk
+#Include libs\ObjCSV.ahk
+
+
+; --------------- LOAD GAME DATA ---------------
+
+strFile := A_ScriptDir . "\data\games.csv"
+strFields := "" ; this will contain the field names after loading csv
+game_data := ObjCSV_CSV2Collection(strFile, strFields)
 
 
 ; --------------- OPEN GUI ---------------
 
-game_choice := select_game_gui()
+game_choice := select_game_gui(game_data)
 
 
 ; --------------- OPEN RAZER CORTEX ---------------
