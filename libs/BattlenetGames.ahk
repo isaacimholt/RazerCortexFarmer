@@ -13,10 +13,10 @@ open_battlenet(){
         if (battlenet_path == "ERROR"){
 
             path_array := []
-            path_array[1] := "C:\Program Files\Blizzard App\Battle.net.exe"
-            path_array[2] := "C:\Program Files (x86)\Blizzard App\Battle.net.exe"
-            path_array[3] := "C:\Program Files\Battle.net\Battle.net.exe"
-            path_array[4] := "C:\Program Files (x86)\Battle.net\Battle.net.exe"
+            path_array[1] := "C:\Program Files\Blizzard App\Battle.net Launcher.exe"
+            path_array[2] := "C:\Program Files (x86)\Blizzard App\Battle.net Launcher.exe"
+            path_array[3] := "C:\Program Files\Battle.net\Battle.net Launcher.exe"
+            path_array[4] := "C:\Program Files (x86)\Battle.net\Battle.net Launcher.exe"
 
             for index, path in path_array{
 
@@ -29,8 +29,8 @@ open_battlenet(){
 
             ; if we've still not found the file, then have user select it
             if (battlenet_path == "ERROR"){
-                MsgBox % "Please select the Battle.net.exe file"
-                FileSelectFile, battlenet_path, 3, , Select Battle.net.exe, Executables (*.exe)
+                MsgBox % "Please select the Battle.net Launcher.exe file"
+                FileSelectFile, battlenet_path, 3, , Select Battle.net Launcher.exe, Executables (*.exe)
             }
             
             ; save the file location for next time
@@ -59,7 +59,7 @@ open_battlenet_game(game_window_title, game_code){
     
     WinWait %shell%
     Send {Raw} battlenet://%game_code%
-    Send {ENTER}
+    ; Send {ENTER}
     
     WinWait, %game_window_title%
     WinActivate, %game_window_title%

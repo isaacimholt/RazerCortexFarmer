@@ -59,7 +59,6 @@ if !WinExist("Razer Cortex"){
     ; save the file location for next time
     IniWrite, %cortex_path%, data/config.ini, Paths, Cortex
     
-
     ; open the file
     Run, %cortex_path%
     
@@ -70,7 +69,6 @@ if !WinExist("Razer Cortex"){
 ; --------------- RUN GAMES ---------------
 
 if (game_data[game_choice].source == "BattleNet") {
-    ;MsgBox % game_data[game_choice].game_code
     open_battlenet_game(game_data[game_choice].game_name, game_data[game_choice].game_code)
 }
 
