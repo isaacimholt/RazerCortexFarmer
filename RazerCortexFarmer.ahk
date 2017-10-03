@@ -71,10 +71,10 @@ WinClose, Razer Cortex      ; only works with admin privileges
 ; --------------- RUN GAMES ---------------
 
 if (game_data[game_choice].source == "BattleNet") {
-    open_battlenet_game(game_data[game_choice].game_name, game_data[game_choice].game_code)
+    open_battlenet_game(game_data[game_choice].window_title, game_data[game_choice].game_code)
 }
 else if (game_data[game_choice].source == "Steam") {
-    open_steam_game(game_data[game_choice].game_name, game_data[game_choice].game_code, game_data[game_choice].exe)
+    open_steam_game(game_data[game_choice].window_title, game_data[game_choice].game_code, game_data[game_choice].exe)
 }
 
 
