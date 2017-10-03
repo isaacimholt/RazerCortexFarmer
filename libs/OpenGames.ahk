@@ -41,7 +41,8 @@ open_battlenet(){
         Run, %battlenet_path%
         WinWait, ahk_exe Battle.net.exe
     }
-    ;WinActivate, Blizzard
+    
+    Return
 }
 
 ; --------------- OPEN BATTLENET GAME ---------------
@@ -50,34 +51,47 @@ open_battlenet(){
 
 open_battlenet_game(game_window_title, game_code){
 
+    ; don't open game if already running
+    IfWinExist, %game_window_title%
+        Return
+
     ; make sure battlenet is running and active
     open_battlenet()
 
-    ;Run, battlenet
+    ; open windows run window (work-around for ahk Run not working)
     shell:=ComObjCreate("Shell.Application")
     shell.FileRun()
-    
-    WinWait %shell%
+    WinWait, Run ahk_exe explorer.exe       ; "Run" is window title, not command
+    WinActivate, Run ahk_exe explorer.exe
+
+    ; send battlenet uri through run window
     Send {Raw} battlenet://%game_code%
     Send {ENTER}
     
+    ; wait for game to load
     WinWait, %game_window_title%
     WinActivate, %game_window_title%
+
+    ; minimize battlenet
     if WinExist("ahk_exe Battle.net.exe"){
         WinMinimize, ahk_exe Battle.net.exe
     }
+
+    Return
 }
 
 ; --------------- OPEN STEAM GAME ---------------
 open_steam_game(game_window_title, game_code, game_process) {
-    ; check that game is not open (must not be in-game)
-    ; TODO
+    
+    ; don't open game if already running
+    IfWinExist (%game_window_title% ahk_exe %game_process%)
+        Return
     
     ; open game if not open
-    IfWinNotExist (%game_window_title% ahk_exe %game_process%) 
-        Run steam://rungameid/%game_code%
-        WinWait, %game_window_title% ahk_exe %game_process%
+    Run steam://rungameid/%game_code%
+    WinWait, %game_window_title% ahk_exe %game_process%
     
+    Return
 }
 
 

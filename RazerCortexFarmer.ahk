@@ -62,10 +62,10 @@ if !WinExist("Razer Cortex"){
 
     ; open the file
     Run, %cortex_path%
-    
     WinWait, Razer Cortex
-    WinClose, Razer Cortex
 }
+
+WinClose, Razer Cortex      ; only works with admin privileges
 
 ; --------------- RUN GAMES ---------------
 
