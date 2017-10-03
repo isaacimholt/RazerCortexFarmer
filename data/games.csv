@@ -1,7 +1,8 @@
-game_name,window_title,source,game_code
+game_name,window_title,source,game_code,exe
 Overwatch,Overwatch,BattleNet,Pro
 Hearthstone,Hearthstone,BattleNet,WTCG
 Diablo III,Diablo III,BattleNet,D3
 Starcraft 2,,BattleNet,SC2
 World of Warcraft,,BattleNet,WoW
 Heroes of the Storm,,BattleNet,Hero
+PUBG,PLAYERUNKNOWN'S BATTLEGROUNDS,Steam,578080,TslGame.exe

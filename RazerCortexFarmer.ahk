@@ -14,7 +14,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 
 #Include libs\FindClick.ahk         ; useful lib for clicking images
-#Include libs\BattlenetGames.ahk
+#Include libs\OpenGames.ahk
 #Include libs\gui.ahk
 #Include libs\ObjCSV.ahk
 
@@ -71,6 +71,9 @@ if !WinExist("Razer Cortex"){
 
 if (game_data[game_choice].source == "BattleNet") {
     open_battlenet_game(game_data[game_choice].game_name, game_data[game_choice].game_code)
+}
+else if (game_data[game_choice].source == "Steam") {
+    open_steam_game(game_data[game_choice].game_name, game_data[game_choice].game_code, game_data[game_choice].exe)
 }
 
 ; --------------- MAX HOURS ---------------

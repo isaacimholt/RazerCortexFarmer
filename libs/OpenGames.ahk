@@ -69,14 +69,14 @@ open_battlenet_game(game_window_title, game_code){
 }
 
 ; --------------- OPEN STEAM GAME ---------------
-open_steam_game(game_window_title, game_id) {
+open_steam_game(game_window_title, game_code, game_process) {
     ; check that game is not open (must not be in-game)
     ; TODO
 
     ; open game if not open
-    IfWinNotExist, %game_window_title% {
+    IfWinNotExist, %game_window_title% ahk_exe %game_process% {
         Run steam://rungameid/%game_id%
-        WinWait, %game_window_title% , 60*3
+        WinWait, %game_window_title% ahk_exe %game_process, 60*3
     }
 }
 
