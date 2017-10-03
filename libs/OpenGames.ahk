@@ -76,7 +76,7 @@ open_steam_game(game_window_title, game_code, game_process) {
     ; open game if not open
     IfWinNotExist, %game_window_title% ahk_exe %game_process% {
         Run steam://rungameid/%game_id%
-        WinWait, %game_window_title% ahk_exe %game_process, 60*3
+        WinWait, %game_window_title% ahk_exe %game_process%, 60*3
     }
 }
 
