@@ -86,7 +86,7 @@ IDLE_START := 1000 * 60 * 5     ; start mouse-move after 5 mins user afk (in ms)
 IDLE_UPDATE := 1000 * 5         ; move mouse every 5 seconds while user afk (in ms)
 
 ; check saved minutes
-minute_counter := UpdateSavedMinutes()
+minute_counter := SaveMinutes()
 
 SetTimer, GameMinutesTimer, 60000   ; run every minute
 SetTimer, IdleStartTimer, %IDLE_START%
@@ -104,7 +104,7 @@ MoveMouseRand(){
     mousemove, %ranX%, %ranY%, 100, R
 }
 
-UpdateSavedMinutes(mins:=0){
+SaveMinutes(mins:=0){
     ; updates minutes saved on file
     ; call without parameters to check currently saved minutes
 
@@ -132,9 +132,8 @@ GameMinutesTimer:
     ; keep track of game time, run once per minute
     If WinExist(window_title) {
         minute_counter += 1
-        UpdateSavedMinutes(1)
+        SaveMinutes(1)
     }
-        
     
     ; stop idling if max time reached
     if ( minute_counter >= MAX_GAME_MINUTES ){
