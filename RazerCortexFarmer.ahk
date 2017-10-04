@@ -120,7 +120,7 @@ UpdateSavedMinutes(mins:=0){
     }
 
     IniWrite, %now_date%, data/config.ini, Timer, last_update
-    IniWrite, %old_minutes%, data/config.ini, Timer, minutes_idled
+    IniWrite, %now_minutes%, data/config.ini, Timer, minutes_idled
 
     Return now_minutes
 }
