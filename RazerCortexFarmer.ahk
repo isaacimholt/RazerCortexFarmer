@@ -39,23 +39,23 @@ if !WinExist("Razer Cortex"){
     IniRead, cortex_path, data/config.ini, Paths, Cortex
 
     path_array := []
-        path_array[1] := "C:\Program Files\Razer\Razer Cortex\CortexLauncher.exe"
-        path_array[2] := "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
+    path_array[1] := "C:\Program Files\Razer\Razer Cortex\CortexLauncher.exe"
+    path_array[2] := "C:\Program Files (x86)\Razer\Razer Cortex\CortexLauncher.exe"
 
-        for index, path in path_array{
+    for index, path in path_array{
 
-            ; check if this file exists
-            if FileExist(path){
-                cortex_path := path
-                Break
-            }
+        ; check if this file exists
+        if FileExist(path){
+            cortex_path := path
+            Break
         }
+    }
 
-        ; if we've still not found the file, then have user select it
-        if (cortex_path == "ERROR"){
-            MsgBox % "Please select the Cortex Launcher executable"            
-            FileSelectFile, cortex_path, 3, , Select Cortex Launcher, Executables (*.exe)
-        }
+    ; if we've still not found the file, then have user select it
+    if (cortex_path == "ERROR"){
+        MsgBox % "Please select the Cortex Launcher executable"            
+        FileSelectFile, cortex_path, 3, , Select Cortex Launcher, Executables (*.exe)
+    }
 
     ; save the file location for next time
     IniWrite, %cortex_path%, data/config.ini, Paths, Cortex
