@@ -82,7 +82,7 @@ else if (game_data[game_choice].source == "Steam") {
 
 minute_counter := 0             ; for tracking game time
 MAX_GAME_MINUTES := 60 * 5      ; keep game open 5 hours
-IDLE_START := 1000 * 60 * 5     ; start mouse-move after 5 mins user afk (in ms)
+IDLE_START := 1000 * 60 * 3     ; start mouse-move after 3 mins user afk (in ms)
 IDLE_UPDATE := 1000 * 5         ; move mouse every 5 seconds while user afk (in ms)
 
 ; check saved minutes
@@ -151,9 +151,8 @@ IdleStartTimer:
 
     ; check that user has been afk long enough to start
     if ( A_TimeIdlePhysical >= IDLE_START ){
-
         ; switch to IdleUpdateTimer
-        SetTimer, IdleStartTimer, off
+        SetTimer, , off
         SetTimer, IdleUpdateTimer, %IDLE_UPDATE%
     }
 
@@ -162,13 +161,16 @@ Return
 IdleUpdateTimer:
 
     ; check if user has returned from afk
-    if ( A_TimeIdlePhysical <= IDLE_UPDATE ){
-
+    if ( A_TimeIdlePhysical < IDLE_UPDATE ){
+        /*  
+            attention: mousemove command appears to affect A_TimeIdlePhysical
+            therefore don't set above to <= as it ALWAYS triggers from itself
+        */
         ; switch to IdleStartTimer
-        SetTimer, IdleUpdateTimer, off
+        SetTimer, , off
         SetTimer, IdleStartTimer, %IDLE_START%
     } else {
-        
+        TrayTip, IdleUpdateTimer, Move mouse
         ; if user hasn't returned - move mouse
         MoveMouseRand()
     }
