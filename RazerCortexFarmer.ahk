@@ -160,12 +160,8 @@ Return
 
 IdleUpdateTimer:
 
-    ; check if game is open before idling
-    If !WinExist(window_title)
-        Return
-
-    ; check if user has returned from afk
-    if ( A_TimeIdlePhysical < IDLE_UPDATE ){
+    ; check if user has returned from afk or game not open
+    if ( A_TimeIdlePhysical < IDLE_UPDATE or !WinExist(window_title) ){
         /*  
             attention: mousemove command appears to affect A_TimeIdlePhysical
             therefore don't set above to <= as it ALWAYS triggers from itself
