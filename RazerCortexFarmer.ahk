@@ -160,6 +160,10 @@ Return
 
 IdleUpdateTimer:
 
+    ; check if game is open before idling
+    If !WinExist(window_title)
+        Return
+
     ; check if user has returned from afk
     if ( A_TimeIdlePhysical < IDLE_UPDATE ){
         /*  
