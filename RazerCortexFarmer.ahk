@@ -120,7 +120,7 @@ SaveMinutes(mins:=0){
 
     today_10_am = %A_YYYY%-%A_MM%-%A_DD% 10:00
     yesterday := a_now
-    yesterday -= 1, days
+    yesterday += -1, days
     FormatTime, yesterday_10_am, %yesterday%, yyyy-MM-dd 10:00
     
     if (now_date_time >= today_10_am) {
