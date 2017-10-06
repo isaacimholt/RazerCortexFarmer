@@ -118,10 +118,10 @@ SaveMinutes(mins:=0){
     IniRead, old_date_time, data/config.ini, Timer, last_update, %now_date_time%
     IniRead, old_minutes, data/config.ini, Timer, minutes_idled, 0
 
-    today_10_am = %A_YYYY%-%A_MM%-%A_DD% 10:00    
+    today_10_am = %A_YYYY%-%A_MM%-%A_DD% 10:00
     yesterday := a_now
-	yesterday -= 1, days
-	FormatTime, yesterday_10_am, %yesterday%, yyyy-MM-dd 10:00
+    yesterday -= 1, days
+    FormatTime, yesterday_10_am, %yesterday%, yyyy-MM-dd 10:00
     
     if (now_date_time >= today_10_am) {
     	; dopo le 10am
