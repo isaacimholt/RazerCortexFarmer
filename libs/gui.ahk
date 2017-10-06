@@ -7,7 +7,7 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 select_game_gui(game_data){
     global
-    local vGameChoice, index
+    local vGameChoice, vTimeToIdle, index
 
     dropdown_list_values := ""
     loop, % game_data.MaxIndex()
@@ -21,10 +21,12 @@ select_game_gui(game_data){
             
     ; Read last game choosen
     IniRead, N, data/config.ini, DefaultGame, Game, 1
-    Gui Show, w300 h150, Select Game to idle
-    Gui, Add, Text, x100 y20 w100 h23 Center,Select a game to idle
-    Gui Add, DropDownList, x90 y50 Choose%N% vGameChoice, %dropdown_list_values%
-    Gui Add, Button, x110 y80 w80 h23, &OK
+    Gui Show, w300 h200, Select Game to idle
+    Gui, Add, Text, x97 y20 w100 h23 Center,Select a game to idle
+    Gui Add, DropDownList, x90 y45 Choose%N% vGameChoice, %dropdown_list_values%
+    Gui, Add, Text, x82 y90 w130 h23 Center,Time to idle in minutes
+    Gui Add, DropDownList, x90 y115 Choose1 vTimeToIdle, 300||150|600
+    Gui Add, Button, x110 y160 w80 h23, &OK
     Gui, +LastFound
     GuiHWND := WinExist()
     WinWaitClose, ahk_id %GuiHWND%  ;--waiting for gui to close
@@ -45,5 +47,6 @@ select_game_gui(game_data){
         }
         ; Save game index
         IniWrite, %index%, data/config.ini, DefaultGame, Game
+        IniWrite, %TimeToIdle%, data/config.ini, IdleTime, TimeToIdle
         return index
 }

@@ -1,9 +1,10 @@
-game_name,window_title,source,game_code,exe
-Overwatch,Overwatch,BattleNet,Pro
-Hearthstone,Hearthstone,BattleNet,WTCG
-Diablo III,Diablo III,BattleNet,D3
-Starcraft 2,,BattleNet,SC2
-World of Warcraft,,BattleNet,WoW
-Heroes of the Storm,,BattleNet,Hero
-PUBG,PLAYERUNKNOWN'S BATTLEGROUNDS,Steam,578080,TslGame.exe
-Dota 2,Dota 2,Steam,570,dota2.exe
+game_name,window_title,source,game_code,exe,active
+Overwatch,Overwatch,BattleNet,Pro,,0
+Hearthstone,Hearthstone,BattleNet,WTCG,,0
+Diablo III,Diablo III,BattleNet,D3,,1
+Starcraft 2,,BattleNet,SC2,,0
+World of Warcraft,,BattleNet,WoW,,0
+Heroes of the Storm,,BattleNet,Hero,,0
+PUBG,PLAYERUNKNOWN'S BATTLEGROUNDS,Steam,578080,TslGame.exe,1
+Dota 2,Dota 2,Steam,570,dota2.exe,1
+World of Tanks,World of Tanks,Steam,444200,,1
