@@ -108,18 +108,20 @@ SaveMinutes(mins:=0){
     ; updates minutes saved on file
     ; call without parameters to check currently saved minutes
 
-    now_date = %A_YYYY%-%A_MM%-%A_DD%
+    now_date_time = %A_YYYY%-%A_MM%-%A_DD% %A_HH%:%A_mm%
     
-    IniRead, old_date, data/config.ini, Timer, last_update, %now_date%
+    IniRead, old_date_time, data/config.ini, Timer, last_update, %now_date_time%
     IniRead, old_minutes, data/config.ini, Timer, minutes_idled, 0
 
-    if (old_date < now_date) {
+    date_time_1 = %A_YYYY%-%A_MM%-%A_DD% 10:00
+
+    if (old_date_time < now_date_time) {
         now_minutes := 0
     } else {
         now_minutes := old_minutes + mins
     }
 
-    IniWrite, %now_date%, data/config.ini, Timer, last_update
+    IniWrite, %now_date_time%, data/config.ini, Timer, last_update
     IniWrite, %now_minutes%, data/config.ini, Timer, minutes_idled
 
     Return now_minutes
