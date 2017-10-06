@@ -62,11 +62,13 @@ open_battlenet_game(game_window_title, game_code){
     shell:=ComObjCreate("Shell.Application")
     shell.FileRun()
     WinWait, Run ahk_exe explorer.exe       ; "Run" is window title, not command
+    BlockInput On
     WinActivate, Run ahk_exe explorer.exe
 
     ; send battlenet uri through run window
     Send {Raw} battlenet://%game_code%
     Send {ENTER}
+    BlockInput Off
     
     ; wait for game to load
     WinWait, %game_window_title%
