@@ -113,7 +113,7 @@ SaveMinutes(mins:=0){
     ; updates minutes saved on file
     ; call without parameters to check currently saved minutes
 
-    now_date_time = %A_YYYY%-%A_MM%-%A_DD% %A_HH%:%A_mm%
+    now_date_time = %A_YYYY%-%A_MM%-%A_DD% %A_Hour%:%A_Min%
     
     IniRead, old_date_time, data/config.ini, Timer, last_update, %now_date_time%
     IniRead, old_minutes, data/config.ini, Timer, minutes_idled, 0
@@ -121,7 +121,7 @@ SaveMinutes(mins:=0){
     today_10_am = %A_YYYY%-%A_MM%-%A_DD% 10:00
     yesterday := a_now
     yesterday += -1, days
-    FormatTime, yesterday_10_am, %yesterday%, yyyy-MM-dd 10:00
+    FormatTime, yesterday_10_am, %yesterday%, yyyy-MM-dd 10:10
     
     if (now_date_time >= today_10_am) {
     	; dopo le 10am
