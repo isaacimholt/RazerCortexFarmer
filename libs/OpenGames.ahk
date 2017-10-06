@@ -86,14 +86,12 @@ open_battlenet_game(game_window_title, game_code){
 open_steam_game(game_window_title, game_code, game_process) {
     
     ; don't open game if already running
-    IfWinExist (%game_window_title% ahk_exe %game_process%)
+    IfWinExist (%game_window_title%)
         Return
     
     ; open game if not open
     Run steam://rungameid/%game_code%
-    WinWait, %game_window_title% ahk_exe %game_process%
+    WinWait, %game_window_title%
     
     Return
 }
-
-
