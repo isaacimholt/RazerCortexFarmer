@@ -113,7 +113,7 @@ SaveMinutes(mins:=0){
     ; updates minutes saved on file
     ; call without parameters to check currently saved minutes
 
-    now_date_time = %A_YYYY%-%A_MM%-%A_DD% %A_HH%:%A_mm%
+    now_date_time = %A_YYYY%-%A_MM%-%A_DD% %A_Hour%:%A_Min%
     
     IniRead, old_date_time, data/config.ini, Timer, last_update, %now_date_time%
     IniRead, old_minutes, data/config.ini, Timer, minutes_idled, 0
@@ -151,8 +151,7 @@ GameMinutesTimer:
 
     ; keep track of game time, run once per minute
     If WinExist(window_title) {
-        minute_counter += 1
-        SaveMinutes(1)
+        minute_counter = SaveMinutes(1)
     }
     
     ; stop idling if max time reached
