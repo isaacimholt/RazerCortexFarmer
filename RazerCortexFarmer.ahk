@@ -86,7 +86,9 @@ else if (game_data[game_choice].source == "Steam") {
 ; --------------- ANTI-AFK ---------------
 
 minute_counter := 0             ; for tracking game time
-MAX_GAME_MINUTES := 60 * 5      ; keep game open 5 hours
+; MAX_GAME_MINUTES := 60 * 5      ; keep game open 5 hours
+
+IniRead, MAX_GAME_MINUTES, data/config.ini, IdleTime, TimeToIdle
 IDLE_START := 1000 * 60 * 3     ; start mouse-move after 3 mins user afk (in ms)
 IDLE_UPDATE := 1000 * 5         ; move mouse every 5 seconds while user afk (in ms)
 
