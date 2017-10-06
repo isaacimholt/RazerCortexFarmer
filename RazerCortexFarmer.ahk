@@ -26,11 +26,6 @@ strFile := A_ScriptDir . "\data\games.csv"
 strFields := "" ; this will contain the field names after loading csv
 game_data := ObjCSV_CSV2Collection(strFile, strFields)
 
-date_time_1 = %A_YYYY%-%A_MM%-%A_DD% 10:00
-tomorrow := a_now
-tomorrow += 1, days
-FormatTime, date_time_2, %tomorrow%, yyyy-MM-dd 10:00
-
 ; --------------- OPEN GUI ---------------
 
 game_choice := select_game_gui(game_data)
