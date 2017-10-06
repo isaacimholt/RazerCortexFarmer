@@ -26,6 +26,11 @@ strFile := A_ScriptDir . "\data\games.csv"
 strFields := "" ; this will contain the field names after loading csv
 game_data := ObjCSV_CSV2Collection(strFile, strFields)
 
+date_time_1 = %A_YYYY%-%A_MM%-%A_DD% 10:00
+tomorrow := a_now
+tomorrow += 1, days
+FormatTime, date_time_2, %tomorrow%, yyyy-MM-dd 10:00
+
 ; --------------- OPEN GUI ---------------
 
 game_choice := select_game_gui(game_data)
@@ -113,12 +118,25 @@ SaveMinutes(mins:=0){
     IniRead, old_date_time, data/config.ini, Timer, last_update, %now_date_time%
     IniRead, old_minutes, data/config.ini, Timer, minutes_idled, 0
 
-    date_time_1 = %A_YYYY%-%A_MM%-%A_DD% 10:00
-
-    if (old_date_time < now_date_time) {
-        now_minutes := 0
+    today_10_am = %A_YYYY%-%A_MM%-%A_DD% 10:00    
+    yesterday := a_now
+	yesterday -= 1, days
+	FormatTime, yesterday_10_am, %yesterday%, yyyy-MM-dd 10:00
+    
+    if (now_date_time >= today_10_am) {
+    	; dopo le 10am
+    	if (old_date_time < today_10_am) {
+        	now_minutes := 0
+    	} else {
+        	now_minutes := old_minutes + mins
+    	}
     } else {
-        now_minutes := old_minutes + mins
+    	; mattina presto
+        if (old_date_time < yesterday_10_am) {
+        	now_minutes := 0
+    	} else {
+        	now_minutes := old_minutes + mins
+    	}
     }
 
     IniWrite, %now_date_time%, data/config.ini, Timer, last_update
@@ -142,7 +160,6 @@ GameMinutesTimer:
         SetTimer, GameMinutesTimer, off
         SetTimer, IdleStartTimer, off
         SetTimer, IdleUpdateTimer, off
-        TrayTip, info, %minute_counter%
         WinClose, %window_title% ; possibly requires admin?
         ExitApp
     }
@@ -172,7 +189,6 @@ IdleUpdateTimer:
         SetTimer, , off
         SetTimer, IdleStartTimer, %IDLE_START%
     } else {
-        TrayTip, IdleUpdateTimer, Move mouse
         ; if user hasn't returned - move mouse
         MoveMouseRand()
     }
