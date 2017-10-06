@@ -121,7 +121,7 @@ SaveMinutes(mins:=0){
     today_10_am = %A_YYYY%-%A_MM%-%A_DD% 10:00
     yesterday := a_now
     yesterday += -1, days
-    FormatTime, yesterday_10_am, %yesterday%, yyyy-MM-dd 10:00
+    FormatTime, yesterday_10_am, %yesterday%, yyyy-MM-dd 10:10
     
     if (now_date_time >= today_10_am) {
     	; dopo le 10am
