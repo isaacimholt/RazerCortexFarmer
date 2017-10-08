@@ -148,7 +148,7 @@ GameMinutesTimer:
 
     ; keep track of game time, run once per minute
     If WinExist(window_title) {
-        minute_counter = SaveMinutes(1)
+        minute_counter := SaveMinutes(1)
     }
     
     ; stop idling if max time reached
