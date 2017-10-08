@@ -4,7 +4,7 @@ AutoHotKey script to automatically open **Razer Cortex**, open a game of your ch
 
 ## How to use
 
-Clone or [download](https://github.com/isaacimholt/RazerCortexFarmer/archive/master.zip) this repository, **run** RazerCortexFarmer_v1_0.exe and choose a game **from the list**.
+Clone or [download](https://github.com/isaacimholt/RazerCortexFarmer/archive/master.zip) this repository, **run** RazerCortexFarmer_v1_1.exe and choose a game **from the list**.
 
 ![rcf_selected](https://imgur.com/iHDuPNX.png)
 

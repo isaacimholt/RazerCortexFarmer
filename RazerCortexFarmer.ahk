@@ -95,8 +95,10 @@ SetTimer, IdleStartTimer, %IDLE_START%
 
 Return  ; app stays open because of #Persistent
 
-
-
+; --------------- TRY ICON MENU ---------------
+;IniRead, minutes_idled, data/config.ini, Timer, minutes_idled, 0
+;Menu, tray, add  ; Creates a separator line.
+;Menu, tray, add, %minutes_idled% minutes ideled, PD ; Creates a new menu item.
 ; ================================================
 ; --------------- HELPER FUNCTIONS ---------------
 
@@ -138,9 +140,11 @@ SaveMinutes(mins:=0){
 
     IniWrite, %now_date_time%, data/config.ini, Timer, last_update
     IniWrite, %now_minutes%, data/config.ini, Timer, minutes_idled
-
+    ;percentage := %now_minutes%/%MAX_GAME_MINUTES%*100
     Return now_minutes
 }
+
+;PD:
 
 GameMinutesTimer:
 
