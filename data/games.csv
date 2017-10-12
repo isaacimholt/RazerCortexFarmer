@@ -1,4 +1,4 @@
-game_name,window_title,source,game_code,exe,active
+game_name,window_title,source,game_launch,exe,active
 Overwatch,Overwatch,BattleNet,Pro,,0
 Hearthstone,Hearthstone,BattleNet,WTCG,,0
 Diablo III,Diablo III,BattleNet,D3,,1

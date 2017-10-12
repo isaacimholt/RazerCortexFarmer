@@ -28,7 +28,7 @@ game_data := ObjCSV_CSV2Collection(strFile, strFields)
 
 ; --------------- OPEN GUI ---------------
 
-game_choice := select_game_gui(game_data)
+game_launch := select_game_gui(game_data)
 
 ; --------------- OPEN RAZER CORTEX ---------------
 
@@ -70,13 +70,15 @@ WinClose, Razer Cortex      ; only works with admin privileges
 
 ; --------------- RUN GAMES ---------------
 
-if (game_data[game_choice].source == "BattleNet") {
-    open_battlenet_game(game_data[game_choice].window_title, game_data[game_choice].game_code)
+if (game_data[game_launch].source == "BattleNet") {
+    open_battlenet_game(game_data[game_launch].window_title, game_data[game_launch].game_code)
 }
-else if (game_data[game_choice].source == "Steam") {
-    open_steam_game(game_data[game_choice].window_title, game_data[game_choice].game_code, game_data[game_choice].exe)
+else if (game_data[game_launch].source == "Steam") {
+    open_steam_game(game_data[game_launch].window_title, game_data[game_launch].game_code, game_data[game_launch].exe)
 }
-
+else if (game_data[game_launch].source == "None") {
+    open_none_game(game_data[game_launch].window_title, game_data[game_launch].game_path, game_data[game_launch].exe)
+}
 
 ; --------------- ANTI-AFK ---------------
 
@@ -148,7 +150,7 @@ SaveMinutes(mins:=0){
 
 GameMinutesTimer:
 
-    window_title := game_data[game_choice].window_title
+    window_title := game_data[game_launch].window_title
 
     ; keep track of game time, run once per minute
     If WinExist(window_title) {
