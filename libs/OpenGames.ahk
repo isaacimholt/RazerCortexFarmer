@@ -110,6 +110,10 @@ open_none_game(game_window_title, game_launch, game_process) {
     if (game_launch == ""){
         MsgBox % "Please select the game executable"            
         FileSelectFile, game_launch, 3, , Select Game Exe, Executables (*.exe)
+
+        ; http://code.jeanlalonde.ca/ahk/ObjCSV/ObjCSV-doc/ObjCSV_Collection2CSV.html
+        ; https://autohotkey.com/board/topic/96619-objcsv-library-tutorial-basic/#entry611297
+        ObjCSV_Collection2CSV(game_data, strFile, 1, strFields, , 1)
     } 
     
     Run, %game_launch%
