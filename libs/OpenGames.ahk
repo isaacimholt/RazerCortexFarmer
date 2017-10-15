@@ -108,8 +108,8 @@ open_none_game(game_window_title, game_launch, game_process) {
 
     ; if we've still not found the file, then have user select it
     if (game_launch == ""){
-        MsgBox % "Please select the game executable"            
-        FileSelectFile, game_launch, 3, , Select Game Exe, Executables (*.exe)
+        MsgBox % "Please select the executable"            
+        FileSelectFile, game_launch, 3, , Select game exe, Executables (*.exe)
 
         loop, % game_data.MaxIndex() {
             ; game in csv might have title but not the process or vice versa
