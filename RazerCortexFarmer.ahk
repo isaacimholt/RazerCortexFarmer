@@ -86,7 +86,7 @@ else if (game_data[game_launch].source == "Steam") {
     open_steam_game(game_data[game_launch].window_title, game_data[game_launch].game_code, game_data[game_launch].exe)
 }
 else if (game_data[game_launch].source == "None") {
-    open_none_game(game_data[game_launch].window_title, game_data[game_launch].game_path, game_data[game_launch].exe)
+    open_none_game(game_data[game_launch])
 }
 
 ; --------------- ANTI-AFK ---------------

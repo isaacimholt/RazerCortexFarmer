@@ -96,7 +96,12 @@ open_steam_game(game_window_title, game_launch, game_process) {
     Return
 }
 
-open_none_game(game_window_title, game_launch, game_process) {
+open_none_game(game_data_row) {
+
+    game_window_title   := game_data_row.game_window_title
+    game_process        := game_data_row.game_process
+    game_launch         := game_data_row.game_launch
+    game_name           := game_data_row.game_name
     
     strFile := A_ScriptDir . "\my_games.csv"
     strFields := "" ; this will contain the field names after loading csv
@@ -112,9 +117,9 @@ open_none_game(game_window_title, game_launch, game_process) {
         FileSelectFile, game_launch, 3, , Select game exe, Executables (*.exe)
 
         loop, % game_data.MaxIndex() {
-            ; game in csv might have title but not the process or vice versa
-            if (game_data[A_Index].game_window_title == game_window_title Or game_data[A_Index].game_process == game_process) {
+            if (game_data[A_Index].game_name == game_name){
                 game_data[A_Index].game_launch := game_launch
+                Break
             }
         }
 
