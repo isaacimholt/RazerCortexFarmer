@@ -26,6 +26,9 @@ strFile := A_ScriptDir . "\data\games.csv"
 strFields := "" ; this will contain the field names after loading csv
 game_data := ObjCSV_CSV2Collection(strFile, strFields)
 
+IfNotExist, my_games.csv
+    FileCopy, data\games.csv, my_games.csv
+
 ; --------------- OPEN GUI ---------------
 
 game_launch := select_game_gui(game_data)
@@ -64,6 +67,7 @@ if !WinExist("Razer Cortex"){
     ; open the file
     Run, %cortex_path%
     WinWait, Razer Cortex
+    Sleep, 100000
 }
 
 WinClose, Razer Cortex      ; only works with admin privileges
