@@ -22,7 +22,12 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ; --------------- LOAD GAME DATA ---------------
 
-strFile := A_ScriptDir . "\data\games.csv"
+;strFile := A_ScriptDir . "\data\games.csv"
+
+; update data
+UpdateGamesCSV("\my_games.csv", "\data\games.csv")
+
+strFile := A_ScriptDir . "\my_games.csv"
 strFields := "" ; this will contain the field names after loading csv
 game_data := ObjCSV_CSV2Collection(strFile, strFields)
 
@@ -196,3 +201,30 @@ IdleUpdateTimer:
     }
 
 Return
+
+UpdateGamesCSV(target_csv, source_csv){
+
+    strFileSrc      := A_ScriptDir . source_csv
+    strFieldsSrc    := "" ; this will contain the field names after loading csv
+    source_obj      := ObjCSV_CSV2Collection(strFileSrc, strFieldsSrc)
+
+    strFileTrgt     := A_ScriptDir . target_csv
+    strFieldsTrgt   := "" ; this will contain the field names after loading csv
+    target_obj      := ObjCSV_CSV2Collection(strFileTrgt, strFieldsTrgt)
+
+    for s_index,s_value in source_obj{
+        exists := False
+        for t_index,t_value in target_obj{
+            if (s_value.game_name == t_value.game_name) {
+                exists := True
+                Break
+            }
+        }
+        if (!exists){
+            target_obj.push(s_value)
+        }
+    }
+
+    ObjCSV_Collection2CSV(target_obj, strFileTrgt, 1, strFieldsTrgt, , 1)
+
+}
