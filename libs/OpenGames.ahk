@@ -49,7 +49,7 @@ open_battlenet(){
 
 ; https://us.battle.net/forums/en/wow/topic/20742815763
 
-open_battlenet_game(game_window_title, game_code){
+open_battlenet_game(game_window_title, game_launch){
 
     ; don't open game if already running
     IfWinExist, %game_window_title%
@@ -66,7 +66,7 @@ open_battlenet_game(game_window_title, game_code){
     WinActivate, Run ahk_exe explorer.exe
 
     ; send battlenet uri through run window
-    Send {Raw} battlenet://%game_code%
+    Send {Raw} battlenet://%game_launch%
     Send {ENTER}
     BlockInput Off
     
@@ -83,14 +83,52 @@ open_battlenet_game(game_window_title, game_code){
 }
 
 ; --------------- OPEN STEAM GAME ---------------
-open_steam_game(game_window_title, game_code, game_process) {
+open_steam_game(game_window_title, game_launch, game_process) {
     
     ; don't open game if already running
     IfWinExist (%game_window_title%)
         Return
     
     ; open game if not open
-    Run steam://rungameid/%game_code%
+    Run steam://rungameid/%game_launch%
+    WinWait, %game_window_title%
+    
+    Return
+}
+
+open_none_game(game_data_row) {
+
+    game_window_title   := game_data_row.game_window_title
+    game_process        := game_data_row.game_process
+    game_launch         := game_data_row.game_launch
+    game_name           := game_data_row.game_name
+    
+    strFile := A_ScriptDir . "\my_games.csv"
+    strFields := "" ; this will contain the field names after loading csv
+    game_data := ObjCSV_CSV2Collection(strFile, strFields)
+
+    ; don't open game if already running
+    IfWinExist (%game_window_title%)
+        Return
+
+    ; if we've still not found the file, then have user select it
+    if (game_launch == ""){
+        MsgBox % "Please select the executable"            
+        FileSelectFile, game_launch, 3, , Select game exe, Executables (*.exe)
+
+        loop, % game_data.MaxIndex() {
+            if (game_data[A_Index].game_name == game_name){
+                game_data[A_Index].game_launch := game_launch
+                Break
+            }
+        }
+
+        ; http://code.jeanlalonde.ca/ahk/ObjCSV/ObjCSV-doc/ObjCSV_Collection2CSV.html
+        ; https://autohotkey.com/board/topic/96619-objcsv-library-tutorial-basic/#entry611297
+        ObjCSV_Collection2CSV(game_data, strFile, 1, strFields, , 1)
+    } 
+    
+    Run, %game_launch%
     WinWait, %game_window_title%
     
     Return

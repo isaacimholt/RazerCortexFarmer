@@ -22,18 +22,26 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ; --------------- LOAD GAME DATA ---------------
 
-strFile := A_ScriptDir . "\data\games.csv"
+;strFile := A_ScriptDir . "\data\games.csv"
+
+IfNotExist, my_games.csv
+    FileCopy, data\games.csv, my_games.csv
+
+; update data
+UpdateGamesCSV("\my_games.csv", "\data\games.csv")
+
+strFile := A_ScriptDir . "\my_games.csv"
 strFields := "" ; this will contain the field names after loading csv
 game_data := ObjCSV_CSV2Collection(strFile, strFields)
 
 ; --------------- OPEN GUI ---------------
 
-game_choice := select_game_gui(game_data)
+game_launch := select_game_gui(game_data)
 
 ; --------------- OPEN RAZER CORTEX ---------------
 
 ; (using WinExist to open from systray too)
-if !WinExist("Razer Cortex"){
+if !WinExist("ahk_exe RazerCortex.exe"){
     
     ; check if there is existing path
     IniRead, cortex_path, data/config.ini, Paths, Cortex
@@ -63,20 +71,23 @@ if !WinExist("Razer Cortex"){
 
     ; open the file
     Run, %cortex_path%
-    WinWait, Razer Cortex
+    WinWait, ahk_exe RazerCortex.exe
+    ; Sleep, 10000
 }
 
 WinClose, Razer Cortex      ; only works with admin privileges
 
 ; --------------- RUN GAMES ---------------
 
-if (game_data[game_choice].source == "BattleNet") {
-    open_battlenet_game(game_data[game_choice].window_title, game_data[game_choice].game_code)
+if (game_data[game_launch].source == "BattleNet") {
+    open_battlenet_game(game_data[game_launch].window_title, game_data[game_launch].game_code)
 }
-else if (game_data[game_choice].source == "Steam") {
-    open_steam_game(game_data[game_choice].window_title, game_data[game_choice].game_code, game_data[game_choice].exe)
+else if (game_data[game_launch].source == "Steam") {
+    open_steam_game(game_data[game_launch].window_title, game_data[game_launch].game_code, game_data[game_launch].exe)
 }
-
+else if (game_data[game_launch].source == "None") {
+    open_none_game(game_data[game_launch])
+}
 
 ; --------------- ANTI-AFK ---------------
 
@@ -148,7 +159,7 @@ SaveMinutes(mins:=0){
 
 GameMinutesTimer:
 
-    window_title := game_data[game_choice].window_title
+    window_title := game_data[game_launch].window_title
 
     ; keep track of game time, run once per minute
     If WinExist(window_title) {
@@ -194,3 +205,30 @@ IdleUpdateTimer:
     }
 
 Return
+
+UpdateGamesCSV(target_csv, source_csv){
+
+    strFileSrc      := A_ScriptDir . source_csv
+    strFieldsSrc    := "" ; this will contain the field names after loading csv
+    source_obj      := ObjCSV_CSV2Collection(strFileSrc, strFieldsSrc)
+
+    strFileTrgt     := A_ScriptDir . target_csv
+    strFieldsTrgt   := "" ; this will contain the field names after loading csv
+    target_obj      := ObjCSV_CSV2Collection(strFileTrgt, strFieldsTrgt)
+
+    for s_index,s_value in source_obj{
+        exists := False
+        for t_index,t_value in target_obj{
+            if (s_value.game_name == t_value.game_name) {
+                exists := True
+                Break
+            }
+        }
+        if (!exists){
+            target_obj.push(s_value)
+        }
+    }
+
+    ObjCSV_Collection2CSV(target_obj, strFileTrgt, 1, strFieldsTrgt, , 1)
+
+}
