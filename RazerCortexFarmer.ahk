@@ -24,15 +24,15 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 ;strFile := A_ScriptDir . "\data\games.csv"
 
+IfNotExist, my_games.csv
+    FileCopy, data\games.csv, my_games.csv
+
 ; update data
 UpdateGamesCSV("\my_games.csv", "\data\games.csv")
 
 strFile := A_ScriptDir . "\my_games.csv"
 strFields := "" ; this will contain the field names after loading csv
 game_data := ObjCSV_CSV2Collection(strFile, strFields)
-
-IfNotExist, my_games.csv
-    FileCopy, data\games.csv, my_games.csv
 
 ; --------------- OPEN GUI ---------------
 
