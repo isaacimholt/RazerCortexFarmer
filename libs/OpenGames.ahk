@@ -98,7 +98,7 @@ open_steam_game(game_window_title, game_launch, game_process) {
 
 open_none_game(game_window_title, game_launch, game_process) {
     
-    strFile := A_ScriptDir . "\data\games.csv"
+    strFile := A_ScriptDir . "\data\my_games.csv"
     strFields := "" ; this will contain the field names after loading csv
     game_data := ObjCSV_CSV2Collection(strFile, strFields)
 
@@ -108,8 +108,8 @@ open_none_game(game_window_title, game_launch, game_process) {
 
     ; if we've still not found the file, then have user select it
     if (game_launch == ""){
-        MsgBox % "Please select the game executable"            
-        FileSelectFile, game_launch, 3, , Select Game Exe, Executables (*.exe)
+        MsgBox % "Please select the executable"            
+        FileSelectFile, game_launch, 3, , Select game exe, Executables (*.exe)
 
         ; http://code.jeanlalonde.ca/ahk/ObjCSV/ObjCSV-doc/ObjCSV_Collection2CSV.html
         ; https://autohotkey.com/board/topic/96619-objcsv-library-tutorial-basic/#entry611297

@@ -41,7 +41,7 @@ game_launch := select_game_gui(game_data)
 ; --------------- OPEN RAZER CORTEX ---------------
 
 ; (using WinExist to open from systray too)
-if !WinExist("Razer Cortex"){
+if !WinExist("ahk_exe RazerCortex.exe"){
     
     ; check if there is existing path
     IniRead, cortex_path, data/config.ini, Paths, Cortex
@@ -71,8 +71,8 @@ if !WinExist("Razer Cortex"){
 
     ; open the file
     Run, %cortex_path%
-    WinWait, Razer Cortex
-    Sleep, 100000
+    WinWait, ahk_exe RazerCortex.exe
+    ; Sleep, 10000
 }
 
 WinClose, Razer Cortex      ; only works with admin privileges
