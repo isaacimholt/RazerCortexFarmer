@@ -95,6 +95,7 @@ minute_counter := 0             ; for tracking game time
 ; MAX_GAME_MINUTES := 60 * 5      ; keep game open 5 hours
 
 IniRead, MAX_GAME_MINUTES, data/config.ini, IdleTime, TimeToIdle
+MAX_GAME_MINUTES += 15          ; add 15 minutes to max time (fixes cortex not logging remaining coins)
 IDLE_START := 1000 * 60 * 3     ; start mouse-move after 3 mins user afk (in ms)
 IDLE_UPDATE := 1000 * 5         ; move mouse every 5 seconds while user afk (in ms)
 
