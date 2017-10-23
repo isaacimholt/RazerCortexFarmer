@@ -18,6 +18,13 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 #Include libs\OpenGames.ahk
 #Include libs\gui.ahk
 #Include libs\ObjCSV.ahk
+#Include libs\Updater.ahk
+
+
+; --------------- CHECK APP UPDATE ---------------
+
+; check_updates()
+; ExitApp   ; testing
 
 
 ; --------------- LOAD GAME DATA ---------------
